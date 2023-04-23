@@ -35,6 +35,23 @@ pip install clip-retrieval
 
 If your interest it to run the laion5B index, see [this doc](docs/laion5B_back.md)
 
+## Quick Start
+
+To extract clipe embedding, you must check:
+
+1. The image format in webdataset. The default format is `jpg`. You can modify it by `--wds_image_key=XXX`. (If you meet key missing error such as `start_time not found`, please check your dataset format.)
+2. The CLIP model you want to use. The default CLIP model is `ViT-B/32`. You can modify it by `--clip_model=XXX`
+
+To extract clip embedding for LAION-aesthetics-v2-6plus, you can use the following command:
+
+```bash
+clip-retrieval inference --input_dataset "pipe:aws s3 cp --quiet s3://myfolder/laion-aesthetics-v2-6plus/train-00000-of-00007-29aec9150af50f9f.parquet/{00000..00010}.tar -"  --output_folder embeddings_folder --input_format webdataset --wds_image_key webp --clip_model "ViT-L/14"
+```
+
+## TODO
+
+- [ ] Support T5 model for extract text embeddings.
+
 ## Clip client
 
 `ClipClient` allows remote querying of a clip-retrieval backend via python.
